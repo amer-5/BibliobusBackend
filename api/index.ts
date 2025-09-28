@@ -1,15 +1,20 @@
+// api/index.ts
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import express from "express";
 import cors from "cors";
-import { logger } from "../middleware/logger.middleware";
-import routes from "../routes/index"; // sve tvoje rute
+import routes from "../src/routes"; // sve tvoje rute
+import { logger } from "../src/middleware/logger.middleware";
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(logger);
 
-// direktno koristi routes
-app.use("/", routes); // nema "/api" prefixa
+// Direktno koristi sve rute
+app.use("/", routes);
 
-export default (req: VercelRequest, res: VercelResponse) => app(req, res);
+// Export za Vercel
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  return app(req as any, res as any);
+}
