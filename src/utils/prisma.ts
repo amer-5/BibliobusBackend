@@ -1,9 +1,17 @@
+// utils/prisma.ts
 import { PrismaClient } from "@prisma/client";
 
-let prisma: PrismaClient;
-
-if (!global.prisma) {
-  global.prisma = new PrismaClient();
+declare global {
+  // da spriječi višestruke instance u developmentu
+  var prisma: PrismaClient | undefined;
 }
 
-export { prisma: global.prisma };
+export const prisma =
+  global.prisma ||
+  new PrismaClient({
+    log: ["query", "error", "warn"], // možeš izbaciti logove ako ti smeta
+  });
+
+if (process.env.NODE_ENV !== "production") {
+  global.prisma = prisma;
+}

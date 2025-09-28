@@ -1,8 +1,8 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import express from "express";
 import cors from "cors";
-import routes from "../src/routes"; // import index.ts iz routes foldera
-import { logger } from "../src/middleware/logger.middleware";
+import routes from "../routes"; // import index.ts iz routes foldera
+import { logger } from "../middleware/logger.middleware";
 
 const app = express();
 
