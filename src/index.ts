@@ -1,8 +1,8 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import express from "express";
 import cors from "cors";
-import routes from "./routes"; // sve tvoje rute
-import { logger } from "./middleware/logger.middleware";
+import routes from "./routes/index.js"; // sve tvoje rute
+import { logger } from "./middleware/logger.middleware.js";
 
 const app = express();
 
